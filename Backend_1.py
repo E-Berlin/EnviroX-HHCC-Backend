@@ -25,8 +25,6 @@ prompt_template = """
     \n
     City: [Name]
     \n
-    Weather: [Conditions]
-    \n
     Temperature: [Value]
     \n
     Air Quality: [Index/Level]
@@ -36,12 +34,6 @@ prompt_template = """
     PM10: [Value]
     \n
     O3: [Value]
-    \n
-    Water pH: [Value]
-    \n
-    Water Turbidity: [Value]
-    \n
-    Heavy Metals (e.g., Pb): [Value]
     \n
     \n
     **Output Requirements:**
@@ -71,8 +63,6 @@ prompt_template = """
     \n
     City: Beijing
     \n
-    Weather: Cloudy turning to moderate rain
-    \n
     Temperature: 30°C
     \n
     Air Quality: Heavily Polluted
@@ -82,12 +72,6 @@ prompt_template = """
     PM10: 116
     \n
     O3: 10
-    \n
-    Water pH: 6.2
-    \n
-    Water Turbidity: 28 NTU
-    \n
-    Heavy Metals (Pb): 0.08 mg/L
     """
 
 @Backend_1.route("/get_location", methods=["POST"])
@@ -136,28 +120,20 @@ def analyze():
         
         # 提取用户输入的数据
         city = data.get('city', 'Unknown City')
-        weather = data.get('weather', 'Unknown')
         temperature = data.get('temperature', 0)
         air_quality = data.get('air_quality', 'Unknown')
         pm25 = data.get('pm25', 0)
         pm10 = data.get('pm10', 0)
         o3 = data.get('o3', 0)
-        water_ph = data.get('water_ph', 0)
-        water_turbidity = data.get('water_turbidity', 0)
-        heavy_metals = data.get('heavy_metals', 0)
 
         # 将用户输入插入到 prompt 中
         full_prompt = prompt_template \
             .replace("City: [Name]", f"City: {str(city)}") \
-            .replace("Weather: [Conditions]", f"Weather: {str(weather)}") \
             .replace("Temperature: [Value]", f"Temperature: {str(temperature)}") \
             .replace("Air Quality: [Index/Level]", f"Air Quality: {str(air_quality)}") \
             .replace("PM2.5: [Value]", f"PM2.5: {str(pm25)}") \
             .replace("PM10: [Value]", f"PM10: {str(pm10)}") \
-            .replace("O3: [Value]", f"O3: {str(o3)}") \
-            .replace("Water pH: [Value]", f"Water pH: {str(water_ph)}") \
-            .replace("Water Turbidity: [Value]", f"Water Turbidity: {str(water_turbidity)}") \
-            .replace("Heavy Metals (Pb): [Value]", f"Heavy Metals (Pb): {str(heavy_metals)}")
+            .replace("O3: [Value]", f"O3: {str(o3)}")
 
         # 调用 OpenAI API
         response = openai.chat.completions.create(

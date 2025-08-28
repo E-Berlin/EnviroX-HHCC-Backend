@@ -47,16 +47,16 @@ def get_city_data(city_name: str):
 
     return {
         "city": city_name,
-        "weather": "Cloudy turning to moderate rain", #1
+        # "weather": "Cloudy turning to moderate rain", # 1
         "temperature": temp,
         "air_quality": get_aqi_level(aqi),
         "pm25": pm25,
         "pm10": pm10,
         "o3": o3,
-        "water_ph": 6.2, #2
-        "water_turbidity": 28, #3
-        "heavy_metals": 0.08 #4
-        #四个数据爬虫程序基本爬不到，因为网上基本上没这种网站可以爬 T_T
+        # "water_ph": 6.2, # 2
+        # "water_turbidity": 28, # 3
+        # "heavy_metals": 0.08 # 4
+        # 四个数据爬虫程序基本爬不到，因为网上基本上没这种网站可以爬 T_T
     }
 
 

@@ -4,14 +4,14 @@ import requests
 import openai
 from openai import OpenAI
 import Webcrawler_2  # 这里就是队友写的文件
+import os
 
 Backend_1 = Flask(__name__)
 CORS(Backend_1)  # 允许所有跨域请求
 
 # 假装我们有一个 API key（放后端才安全）
-API_KEY = "my_secret_key"
-amap_apiKey = "cffaff6cfd812d5f1af36c7ae4b130da" # 你的高德API Key
-chatGPT_apiKey = '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' # 你的ChatGPT API Key
+amap_apiKey = os.environ.get("AMAP_API_KEY") # 你的高德API Key
+openAI_apiKey = os.environ.get("OPENAI_API_KEY") # 你的ChatGPT API Key
 
 prompt_template = """
     **Prompt:**
@@ -126,7 +126,7 @@ def get_quality():
     #print(result)
     return jsonify(result)
 
-openai.api_key = chatGPT_apiKey
+openai.api_key = openAI_apiKey
 
 @Backend_1.route('/analyze', methods=['POST'])
 def analyze():

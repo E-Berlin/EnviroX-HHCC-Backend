@@ -1,6 +1,7 @@
 import requests
+import os
 
-TOKEN = "67b374b2bcef7468bad3fb3625fa2a57dbf3609a"
+TOKEN = os.environ.get("WAQI_API_TOKEN") # 你的 WAQI API Token，demo 有访问次数限制
 
 def get_aqi_level(aqi_value):
     try:

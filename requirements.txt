@@ -1,0 +1,5 @@
+flask
+flask-cors
+requests
+openai
+gunicorn          # 用于 Render 或生产环境启动 Flask
